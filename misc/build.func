@@ -77,16 +77,6 @@ pve_check() {
   fi
 }
 
-# This function checks the system architecture and exits if it's not "amd64".
-arch_check() {
-  if [ "$(dpkg --print-architecture)" != "amd64" ]; then
-    echo -e "\n ${CROSS} This script will not work with PiMox! \n"
-    echo -e "Exiting..."
-    sleep 2
-    exit
-  fi
-}
-
 # This function checks if the script is running through SSH and prompts the user to confirm if they want to proceed or exit.
 ssh_check() {
   if command -v pveversion >/dev/null 2>&1; then
@@ -432,7 +422,6 @@ advanced_settings() {
 install_script() {
   check_root
   ssh_check
-  #arch_check
   pve_check
   if systemctl is-active -q ping-instances.service; then
     systemctl stop ping-instances.service
