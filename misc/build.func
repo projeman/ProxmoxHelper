@@ -432,7 +432,7 @@ advanced_settings() {
 install_script() {
   check_root
   ssh_check
-  arch_check
+  #arch_check
   pve_check
   if systemctl is-active -q ping-instances.service; then
     systemctl stop ping-instances.service
